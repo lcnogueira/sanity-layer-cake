@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header'
-import { SanityLive } from '@/sanity/lib/live'
+// import { SanityLive } from '@/sanity/lib/live'
 
 export default function FrontendLayout({
   children,
@@ -10,7 +10,7 @@ export default function FrontendLayout({
     <section className="bg-white min-h-screen">
       <Header />
       {children}
-      <SanityLive />
+      {/* <SanityLive /> */}
     </section>
   )
 }
