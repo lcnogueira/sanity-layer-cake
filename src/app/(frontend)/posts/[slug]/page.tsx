@@ -3,9 +3,12 @@ import { notFound } from "next/navigation";
 // import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { Post } from "@/components/Post";
-import { client } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 
 // const options = { next: { revalidate: 60 } };
+
+// NEEDED?? (see example here https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)
+// export const dynamicParams = true // or false, to 404 on unknown paths 
 
 export async function generateStaticParams() {
   const slugs = await client
@@ -24,8 +27,12 @@ export default async function Page({
   //   query: POST_QUERY,
   //   params: await params,
   // });  
-  const { slug } = await params;
-  const post = await client.fetch(POST_QUERY, { slug });
+  // const { slug } = await params;
+  // const post = await client.fetch(POST_QUERY, { slug });
+  const post = await sanityFetch({
+    query: POST_QUERY,
+    params: await params,
+  })
 
   if (!post) {
     notFound();

@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   logging: {
     fetches: {
-      fullUrl: true
+      fullUrl: true //https://www.sanity.io/learn/course/controlling-cached-content-in-next-js/debugging-caching-in-development
     }
   },
   images: {
