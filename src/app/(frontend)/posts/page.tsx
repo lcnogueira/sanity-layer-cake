@@ -1,19 +1,17 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { POSTS_QUERY } from '@/sanity/lib/queries'
-import { PostCard } from '@/components/PostCard'
+import Expandable from '@/components/Expandable'
+import Posts from '@/components/Posts'
 import { Title } from '@/components/Title'
 
-export default async function Page() {
-  const {data: posts} = await sanityFetch({query: POSTS_QUERY});
-
+// Pages in Next.js are Server Components by default
+export default function Page() {
   return (
     <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
       <Title>Post Index</Title>
-      <div className="flex flex-col gap-24 py-12">
-        {posts.map((post) => (
-          <PostCard key={post._id} {...post} />
-        ))}
-      </div>
+      {/* Passing a Server Component (Posts) to Client Components (Expandable) as Props */}
+      {/* https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props */}
+      <Expandable label="Posts">
+        <Posts />
+      </Expandable>
     </main>
   )
 }
